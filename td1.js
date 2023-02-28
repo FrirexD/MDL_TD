@@ -1,5 +1,6 @@
 const fs = require("fs"); 
 let rawdata = fs.readFileSync("users.json","utf8");
+// eslint-disable-next-line no-undef
 var args = process.argv;
 
 
