@@ -1,15 +1,16 @@
-const { timeStamp } = require('console');
-const fs = require('fs'); 
-let rawdata = fs.readFileSync('users.json','utf8');
+const fs = require("fs"); 
+let rawdata = fs.readFileSync("users.json","utf8");
 var args = process.argv;
 
 
 
 const data = JSON.parse(rawdata);
 
-let countries = [];
-let companies = [];
+let countries = []; // tableau d'objets de countries 
 
+let companies = []; // tableau d'objets de companies
+
+//fonction qui permet de savoir si le countries fait déjà parti du tableau d'objets countries 
 function inCountries(countrytable, string){
     for(let i = 0;i<countrytable.length;i++){
         if(countrytable[i].Country == string){
@@ -19,7 +20,7 @@ function inCountries(countrytable, string){
     return false;
 }
 
-
+// fonction qui permet de savoir si la companie fait déjà parti du tableau d'objets companies
 function inCompanies(companytable, string){
     for(let i = 0;i<companytable.length;i++){
         if(companytable[i].Company == string){
@@ -29,11 +30,11 @@ function inCompanies(companytable, string){
     return false;
 }
 
-
-
-
+// pour les country
 if(args[2] == "country"){
+    //pour chaque élément de notre liste 
     for(let i = 0; i < data.length; i++){
+        // 
         if(!inCountries(countries,data[i].country)){
             let obj = {Country:data[i].country, Count:1};
             countries.push(obj);
@@ -47,7 +48,7 @@ if(args[2] == "country"){
         }
     }
     
-
+    //fonction de try 
     for(let i = 0;i < countries.length;i++){        
         let tmp = countries[i];
         let j = i-1;
@@ -61,6 +62,8 @@ if(args[2] == "country"){
     //Printing final elements
     console.log(countries);
 }
+
+//pour les companies
 else if(args[2] == "company"){
     for(let i = 0; i < data.length; i++){
         if(!inCompanies(companies,data[i].company)){
@@ -88,7 +91,7 @@ else if(args[2] == "company"){
         companies[j+1] = tmp;
     }
 
-
+    //print les companies
     console.log(companies);
 }
 else{
