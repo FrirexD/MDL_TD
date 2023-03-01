@@ -1,29 +1,29 @@
 const fs = require("fs"); 
 const { abort } = require("process");
 let rawdata = fs.readFileSync("users.json","utf8");
-// eslint-disable-next-line no-undef
-//var args = process.argv;
-
-//Pour les inputs de Keybords
-const readline = require("readline");
-// eslint-disable-next-line no-undef
-readline.emitKeypressEvents(process.stdin);
-// eslint-disable-next-line no-undef
-if(process.stdin.isTTY) process.stdin.setRawMode(true);
-Menuprint();
-// Listen to Keypress 
-// eslint-disable-next-line no-undef
-process.stdin.on("keypress", (str, key)=> {  if(key.name == "1") { CallMenu(1); } if(key.name == "2" ) { CallMenu(2); } if(key.name == "q"){process.abort(); } } );
-
-
-
-
+// args utilisé sans le menu 
+//var args = process.argv; 
 
 const data = JSON.parse(rawdata);
 
 let countries = []; // tableau d'objets de countries 
 
 let companies = []; // tableau d'objets de companies
+
+//---Pour les inputs de Keybords---
+const readline = require("readline");
+
+readline.emitKeypressEvents(process.stdin);
+
+if(process.stdin.isTTY) process.stdin.setRawMode(true);
+Menuprint();
+// Listen to Keypress 
+process.stdin.on("keypress", (str, key)=> {  if(key.name == "1") { CallMenu(1); } if(key.name == "2" ) { CallMenu(2); } if(key.name == "q"){process.abort(); } } );
+//--- Imputs keybord fin---
+
+
+
+
 
 //fonction qui permet de savoir si le countries fait déjà parti du tableau d'objets countries 
 function inCountries(countrytable, string){
@@ -124,7 +124,6 @@ function CallMenu( k )
     Menuprint();
 
 }
-
 
 function Menuprint ()
 {
