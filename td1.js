@@ -35,11 +35,14 @@ function inCompanies(companytable, string){
 if(args[2] == "country"){
     //pour chaque élément de notre liste 
     for(let i = 0; i < data.length; i++){
-        // 
+        //on ajoute le contry dans notre tableau lorsqu'il ne fait pas partie du tableau 
+        // On regarde s'il en fait partie avec notre fonction inCountries
         if(!inCountries(countries,data[i].country)){
             let obj = {Country:data[i].country, Count:1};
             countries.push(obj);
         }
+        //si le Country fait déjà parti du tableau alors on incrémente de 1 notre Objet
+        // on incrémente avec Count
         else{   
             let j = 0;
             while(countries[j].Country != data[i].country){ 
@@ -49,7 +52,7 @@ if(args[2] == "country"){
         }
     }
     
-    //fonction de try 
+    //fonction de tri Pour avoir dans l'ordre décroissant
     for(let i = 0;i < countries.length;i++){        
         let tmp = countries[i];
         let j = i-1;
@@ -64,14 +67,18 @@ if(args[2] == "country"){
     console.log(countries);
 }
 
-//pour les companies
+//pour les companies on utilise la meme méthode
+//on regarde que l'argument est bien Company
 else if(args[2] == "company"){
+    //pour chaque élément de notre liste
     for(let i = 0; i < data.length; i++){
+        //si la company ne fait pas partie de notre tableau on l'ajoute avec un coupteur dans un objet 
+        //On regarde si la company ne fait pas partie de notre tableau avec la fonction inCompanies
         if(!inCompanies(companies,data[i].company)){
-            //Listing all the different companies
             let obj = {Company:data[i].company, Count:1};
             companies.push(obj);
         }
+        // si la company fait déjà partie de notre tableau alors on incrémente son compteur
         else{   
             let j = 0;
             while(companies[j].Company != data[i].company){ 
@@ -81,7 +88,7 @@ else if(args[2] == "company"){
         }
     }
     
-    
+    //tri des objets dans notre tableau dans l'ordre décroissant
     for(let i = 0;i < companies.length;i++){ 
         let tmp = companies[i];
         let j = i-1;
@@ -96,5 +103,6 @@ else if(args[2] == "company"){
     console.log(companies);
 }
 else{
+    //dans le cas ou la commande rentré dans ARGV n'est pas company ou country
     console.log("ERROR: no option specified (type company or country)");
 }
