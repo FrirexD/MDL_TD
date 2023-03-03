@@ -1,8 +1,9 @@
 const fs = require("fs"); 
-const { abort } = require("process");
+//const { abort } = require("process");
 let rawdata = fs.readFileSync("users.json","utf8");
 // args utilisé sans le menu 
-//var args = process.argv; 
+//var args = proc.argv;
+const proc = require("process");
 
 const data = JSON.parse(rawdata);
 
@@ -10,12 +11,12 @@ const data = JSON.parse(rawdata);
 //---Pour les inputs de Keybords---
 const readline = require("readline");
 
-readline.emitKeypressEvents(process.stdin);
+readline.emitKeypressEvents(proc.stdin);
 
-if(process.stdin.isTTY) process.stdin.setRawMode(true);
+if(proc.stdin.isTTY) proc.stdin.setRawMode(true);
 Menuprint();
 // Listen to Keypress 
-process.stdin.on("keypress", (str, key)=> {  if(key.name == "1") { CallMenu(1); } if(key.name == "2" ) { CallMenu(2); } if(key.name == "q"){process.exit();} if(key.name == "u"){user_loggin();}  } );
+proc.stdin.on("keypress", (str, key)=> {  if(key.name == "1") { CallMenu(1); } if(key.name == "2" ) { CallMenu(2); } if(key.name == "q"){proc.exit();} if(key.name == "u"){user_loggin();}  } );
 //--- Imputs keybord fin---
 
 
