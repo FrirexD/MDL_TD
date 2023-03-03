@@ -6,9 +6,6 @@ let rawdata = fs.readFileSync("users.json","utf8");
 
 const data = JSON.parse(rawdata);
 
-let countries = []; // tableau d'objets de countries 
-
-let companies = []; // tableau d'objets de companies
 
 //---Pour les inputs de Keybords---
 const readline = require("readline");
@@ -18,11 +15,8 @@ readline.emitKeypressEvents(process.stdin);
 if(process.stdin.isTTY) process.stdin.setRawMode(true);
 Menuprint();
 // Listen to Keypress 
-process.stdin.on("keypress", (str, key)=> {  if(key.name == "1") { CallMenu(1); } if(key.name == "2" ) { CallMenu(2); } if(key.name == "q"){process.abort(); } } );
+process.stdin.on("keypress", (str, key)=> {  if(key.name == "1") { CallMenu(1); } if(key.name == "2" ) { CallMenu(2); } if(key.name == "q"){process.exit(); } } );
 //--- Imputs keybord fin---
-
-
-
 
 
 //fonction qui permet de savoir si le countries fait déjà parti du tableau d'objets countries 
@@ -44,8 +38,15 @@ function inCompanies(companytable, string){
     }
     return false;
 }
+
+//fonction qui permet d'appller les fonctions de count des entreprises / pays 
 function CallMenu( k )
 {
+    //initialisation des tableaux à chaque appel pour éviter le cumul de données
+    let countries = []; // tableau d'objets de countries 
+
+    let companies = []; // tableau d'objets de companies
+
     // pour les country
     if(  k == 1 ){ //if keypress = 1  
         //pour chaque élément de notre liste 
@@ -125,15 +126,16 @@ function CallMenu( k )
 
 }
 
+//fonction d'affichage du Menu avec les couleurs dédiées 
 function Menuprint ()
 {
     console.log("\n__________________");
     console.log(" \n Menu :");
     console.log("__________________");
-    console.log("press those keys to acces : ");
-    console.log("\x1b[36m%s\x1b[0m ","1 --> Countries ");
-    console.log("\x1b[33m%s\x1b[0m","2 --> Companies ");
-    console.log("\x1b[31m%s\x1b[0m","q --> QUIT ");
+    console.log("press to access : ");
+    console.log("\x1b[36m%s\x1b[0m ","1 --> Countries "); //cyan
+    console.log("\x1b[33m%s\x1b[0m","2 --> Companies "); //yellow 
+    console.log("\x1b[31m%s\x1b[0m","q --> QUIT "); //pink/ red 
     console.log("__________________");
     
 }
