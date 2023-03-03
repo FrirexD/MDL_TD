@@ -15,7 +15,7 @@ readline.emitKeypressEvents(process.stdin);
 if(process.stdin.isTTY) process.stdin.setRawMode(true);
 Menuprint();
 // Listen to Keypress 
-process.stdin.on("keypress", (str, key)=> {  if(key.name == "1") { CallMenu(1); } if(key.name == "2" ) { CallMenu(2); } if(key.name == "q"){process.exit(); } } );
+process.stdin.on("keypress", (str, key)=> {  if(key.name == "1") { CallMenu(1); } if(key.name == "2" ) { CallMenu(2); } if(key.name == "q"){process.exit();} if(key.name == "u"){user_loggin();}  } );
 //--- Imputs keybord fin---
 
 
@@ -80,7 +80,7 @@ function CallMenu( k )
         }
 
         //Printing final elements
-        console.log(countries);
+        Print_table(countries);
     }
 
     //pour les companies on utilise la meme méthode
@@ -116,14 +116,13 @@ function CallMenu( k )
         }
 
         //print les companies
-        console.log(companies);
+        Print_table(companies);
     }
     else{
         //dans le cas ou la commande rentré dans ARGV n'est pas company ou country
         console.log("ERROR: no option specified (type company or country)");
     }
     Menuprint();
-
 }
 
 //fonction d'affichage du Menu avec les couleurs dédiées 
@@ -135,7 +134,19 @@ function Menuprint ()
     console.log("press to access : ");
     console.log("\x1b[36m%s\x1b[0m ","1 --> Countries "); //cyan
     console.log("\x1b[33m%s\x1b[0m","2 --> Companies "); //yellow 
+    console.log("\x1b[32m%s\x1b[0m","u --> user loggin "); //Green 
     console.log("\x1b[31m%s\x1b[0m","q --> QUIT "); //pink/ red 
     console.log("__________________");
     
+}
+function Print_table(table)
+{
+    for(let i of table)
+    {
+        console.log(i);
+    }
+}
+function user_loggin()
+{
+
 }
